@@ -4,14 +4,22 @@ import random
 def main():
     i = 0
     while(i < 10):
-        i += 1
         start_syllabels = start_get_syllabels()
         r_ss = random.sample(start_syllabels, 1)
         end_syllabels = end_get_syllabels()
         r_es = random.sample(end_syllabels, 1)
-        r_name = r_ss + r_es
-        print("".join(str(e) for e in r_name))
+        r_name = r_ss[0] + r_es[0]
+        if check_name(r_name):
+            i += 1
+            print("".join(str(e) for e in r_name))
 
+def check_name(name):
+    for index, c in enumerate(name):
+        if c == name[index + 1] and c == name[index + 2]:
+            return False
+        elif c == name[-3]:
+            return True
+            
 def count_syllables(word):
     v = "aeiouy"
     v_set = set(v)
